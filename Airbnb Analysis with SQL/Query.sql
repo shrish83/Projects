@@ -79,15 +79,15 @@ JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id */ GROUP BY room_type;
 
 --Q2
 --Identify the most expensive and least expensive neighborhoods for renting.
-SELECT TOP 1 host_neighbourhood as "Most Expensive Neighbourhood", neighbourhood, MAX(conv_price) as "Max Price" FROM dbo.listings 
+SELECT TOP 1 host_neighbourhood as "Most Expensive Neighbourhood", neighbourhood_cleansed, MAX(conv_price) as "Max Price" FROM dbo.listings 
 /*as tbl1
 JOIN dbo.calendar as tbl2 ON tbl1.id = tbl2.cal_listing_id
-JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood Order BY "Max Price" DESC; -- HAVING conv_price = MAX(conv_price);
+JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Max Price" DESC; -- HAVING conv_price = MAX(conv_price);
 
-SELECT TOP 2 host_neighbourhood as "Least Expensive Neighbourhood", neighbourhood, MIN(conv_price) as "Min Price" FROM dbo.listings 
+SELECT TOP 5 host_neighbourhood as "Least Expensive Neighbourhood", neighbourhood_cleansed, MIN(conv_price) as "Min Price" FROM dbo.listings 
 /*as tbl1
 JOIN dbo.calendar as tbl2 ON tbl1.id = tbl2.cal_listing_id
-JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood Order BY "Min Price" ASC; -- HAVING conv_price = MAX(conv_price);
+JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Min Price" ASC; -- HAVING conv_price = MAX(conv_price);
 
 
 --Q3
@@ -125,19 +125,42 @@ ORDER BY Year, season;
 
 ---------------------------- QUERY 2------------------------------------
 
-/*Occupancy and Availability:
+--Occupancy and Availability:
 
 --Q1
 --Calculate the occupancy rate for different neighborhoods or property types.
+SELECT DISTINCT neighbourhood_cleansed AS "Neighbourhood",AVG(conv_weekly_price) AS "Weekly Rate" 
+FROM dbo.listings 
+GROUP BY neighbourhood_cleansed 
+ORDER BY "Weekly Rate";
 
+SELECT DISTINCT property_type AS "Property",AVG(conv_weekly_price) AS "Weekly Rate" 
+FROM dbo.listings 
+GROUP BY property_type
+ORDER BY "Weekly Rate";
+
+SELECT DISTINCT neighbourhood_cleansed AS "Neighbourhood", property_type AS "Property",AVG(conv_weekly_price) AS "Weekly Rate" 
+FROM dbo.listings 
+GROUP BY neighbourhood_cleansed, property_type
+ORDER BY "Neighbourhood", "Property","Weekly Rate";
 
 --Q2
 --Identify properties with the highest and lowest occupancy rates.
+SELECT TOP 2 property_type AS "Property",AVG(conv_weekly_price) AS "Weekly Rate" 
+FROM dbo.listings
+GROUP BY property_type
+ORDER BY "Weekly Rate" DESC;
 
+SELECT TOP 7 property_type AS "Property",AVG(conv_weekly_price) AS "Weekly Rate" 
+FROM dbo.listings
+GROUP BY property_type
+ORDER BY "Weekly Rate" ASC;
 
 
 --Q3
 --Determine the average number of available listings per month.
-
-
-*/
+SELECT YEAR(cal_date) AS "Year", MONTH(cal_date) AS "Month", COUNT(CAST(availability_30 AS float)) AS "Average Number of Available Listings in 30 days"
+FROM dbo.listings AS tbl1
+LEFT JOIN dbo.calendar AS tbl2 ON tbl1.id = tbl2.cal_listing_id
+GROUP BY YEAR(cal_date), MONTH(cal_date)
+ORDER BY Year, Month;

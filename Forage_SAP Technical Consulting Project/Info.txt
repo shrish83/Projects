@@ -1,0 +1,20 @@
+Project Info Link: https://www.theforage.com/virtual-experience/tKxM2fzpMvmuA8sei/sap-usa/sap-tech-consulting-virtual-experience-program/overview
+
+Will be using SAP Analytics Cloud Trial for 30 days for this project
+
+User ID : SAP Hana Cloud Free trial: P2007184455(BTP Cockpit)
+Provider KEy: 1CFF1B8D-B0B0-4CAB-8E30-8B62A2EE1EA2
+SAP Link: https://sactrial-saceu20-q7qwsz7o5eoliiqsmiwonv8i.eu20.hcs.cloud.sap/sap/fpa/ui/app.html#/home
+
+
+Instruction: https://www.theforage.com/virtual-experience/tKxM2fzpMvmuA8sei/sap-usa/sap-tech-consulting-virtual-experience-program/data-analysis
+
+Resources to get your hands dirty on SAP Analytics Cloud
+- https://www.qualtrics.com/au/experience-management/customer/net-promoter-score/?rid=ip&prevsite=uk&newsite=au&geo=IN&geomatch=au
+- https://community.sap.com/topics/cloud-analytics/getting-started
+- https://www.youtube.com/watch?v=OKJpkBzlgI0
+- https://visualbi.com/blogs/sap/sap-analytics-cloud/combining-data-sources-in-sap-analytics-cloud-data-model/
+- https://www.youtube.com/watch?v=FRYwXeyn1vY
+- https://www.youtube.com/watch?v=6lRWlEB71ss
+- https://www.youtube.com/watch?v=WVJ_E7FuqTA
+- https://www.youtube.com/watch?v=shSZvuluT3E
