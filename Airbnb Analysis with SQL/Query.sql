@@ -127,7 +127,12 @@ ORDER BY bathrooms;
 
 --Q1
 --Determine the average, minimum, and maximum prices for different types of accommodations.
-SELECT room_type, AVG(conv_price) as "Average Price", MIN(conv_price) as "Minimum Price", MAX(conv_price) as "Maximum Price" FROM dbo.listings 
+SELECT 
+    room_type, 
+	AVG(conv_price) as "Average Price", 
+	MIN(conv_price) as "Minimum Price", 
+	MAX(conv_price) as "Maximum Price" 
+FROM dbo.listings 
 /*as tbl1
 JOIN dbo.calendar as tbl2 ON tbl1.id = tbl2.cal_listing_id
 JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id */ GROUP BY room_type;
@@ -135,15 +140,17 @@ JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id */ GROUP BY room_type;
 
 --Q2
 --Identify the most expensive and least expensive neighborhoods for renting.
-SELECT TOP 1 host_neighbourhood as "Most Expensive Neighbourhood", neighbourhood_cleansed, MAX(conv_price) as "Max Price" FROM dbo.listings 
-/*as tbl1
+SELECT TOP 1 host_neighbourhood as "Most Expensive Neighbourhood", neighbourhood_cleansed, MAX(conv_price) as "Max Price" 
+FROM dbo.listings as tbl1
 JOIN dbo.calendar as tbl2 ON tbl1.id = tbl2.cal_listing_id
-JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Max Price" DESC; -- HAVING conv_price = MAX(conv_price);
+JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id
+GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Max Price" DESC; -- HAVING conv_price = MAX(conv_price);
 
-SELECT TOP 5 host_neighbourhood as "Least Expensive Neighbourhood", neighbourhood_cleansed, MIN(conv_price) as "Min Price" FROM dbo.listings 
-/*as tbl1
+SELECT TOP 5 host_neighbourhood as "Least Expensive Neighbourhood", neighbourhood_cleansed, MIN(conv_price) as "Min Price" 
+FROM dbo.listings as tbl1
 JOIN dbo.calendar as tbl2 ON tbl1.id = tbl2.cal_listing_id
-JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id*/ GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Min Price" ASC; -- HAVING conv_price = MAX(conv_price);
+JOIN dbo.reviews as tbl3 ON tbl1.id = tbl3.rev_listing_id
+GROUP BY host_neighbourhood,neighbourhood_cleansed Order BY "Min Price" ASC; -- HAVING conv_price = MAX(conv_price);
 
 
 --Q3
