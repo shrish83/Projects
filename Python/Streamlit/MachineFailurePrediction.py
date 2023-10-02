@@ -28,19 +28,19 @@ def main():
     st.title('Machine Breakdown!')
 
     #get input data
-    Air_temperature = st.text_input('Air temperature: ')
-    Process_temperature = st.text_input('Process temperature: ')
-    Rotational_speed = st.text_input('Rotational Speed: ')
-    Torque = st.text_input('Torque: ')
-    Tool_wear = st.text_input('Tool Wear: ')
-    Type_H = st.text_input('Type_H(0 or 1): ')
-    Type_L = st.text_input('Type_L(0 or 1): ')
-    Type_M = st.text_input('Type_M(0 or 1): ')
-    TWF = st.text_input('TWF: ')
-    HDF = st.text_input('HDF: ')
-    PWF	= st.text_input('PWF: ')
-    OSF	= st.text_input('OSF: ')
-    RNF = st.text_input('RNF: ')
+    Air_temperature = st.number_input('Air temperature: ', format="%.6f")
+    Process_temperature = st.number_input('Process temperature: ', format="%.6f")
+    Rotational_speed = st.number_input('Rotational Speed: ', format="%.6f")
+    Torque = st.number_input('Torque: ', format="%.6f")
+    Tool_wear = st.number_input('Tool Wear: ', format="%.6f")
+    Type_H = st.number_input('Type_H(0 or 1): ', step=1)
+    Type_L = st.number_input('Type_L(0 or 1): ', step=1)
+    Type_M = st.number_input('Type_M(0 or 1): ', step=1)
+    TWF = st.number_input('TWF: ', step=1)
+    HDF = st.number_input('HDF: ', step=1)
+    PWF	= st.number_input('PWF: ', step=1)
+    OSF	= st.number_input('OSF: ', step=1)
+    RNF = st.number_input('RNF: ', step=1)
 
 
     #store result
@@ -48,7 +48,7 @@ def main():
 
     #create button
     if st.button('Debug for failure'):
-        debug = predict_failure(['Air_temperature', 'Process_temperature','Rotational_speed','Torque','Tool_wear','Type_H', 'Type_L', 'Type_M', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF'])
+        debug = predict_failure([Air_temperature, Process_temperature,Rotational_speed,Torque,Tool_wear,Type_H, Type_L, Type_M, TWF, HDF, PWF, OSF, RNF])
 
     
     st.success(debug)
