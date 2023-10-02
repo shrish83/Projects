@@ -4,7 +4,7 @@ import pickle
 import streamlit as st
 
 #loading the saved model
-loaded_model = pickle.load(open("C:/Users/Shrishti Vaish/Documents/Projects/Python/Streamlit/rfmodel.sav",'rb'))
+loaded_model = pickle.load(open("./rfmodel.sav",'rb'))
 
 #creating function to take inputs from the user and predict
 def predict_failure(input_data):
