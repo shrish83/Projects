@@ -4,12 +4,12 @@ import pickle
 import streamlit as st
 
 #loading the saved model
-loaded_model = pickle.load(open("C:/Users/Shrishti Vaish/Documents/Projects/Python/Streamlit/rfmodel.sav",'rb'))
+loaded_model = pickle.load(open("./rfmodel.sav",'rb'))
 
 #creating function to take inputs from the user and predict
 def predict_failure(input_data):
     #change shape and conver into array
-    input_data_array = np.asarray(input_data)
+    input_data_array = np.asarray(input_data,dtype=float)
 
     #reshape
     input_data_reshaped = input_data_array.reshape(1,-1)
