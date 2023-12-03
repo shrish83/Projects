@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow.keras import models
 
 # Load the trained model
-model = models.load_model('./NN_MNISTmodel.sav')  # Replace with your model path
+model = models.load_model("C:/Users/Shrishti Vaish/Documents/Projects/Python/Streamlit_NN_MNIST/tf_digit_classifier.h5")  # Replace with your model path
 
 st.title("Handwritten Digit Recognition")
 

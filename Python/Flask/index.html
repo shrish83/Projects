@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST Digit Prediction</title>
+</head>
+<body>
+    <h1>MNIST Digit Prediction</h1>
+    <form id="upload-form">
+        <input type="file" id="file-input" accept="image/*">
+        <button type="button" onclick="predict()">Predict</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function predict() {
+            // Get the selected file
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+
+            // Create FormData object
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Send the image to the Flask server
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Decode base64 image data
+                const imageData = 'data:image/png;base64,' + data.image.data;
+
+                // Display the image
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `
+                    <p>Prediction: ${data.prediction}</p>
+                    <img src="${imageData}" alt="Uploaded Image">
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
